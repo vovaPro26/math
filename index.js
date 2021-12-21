@@ -1,3 +1,7 @@
+
+let timeout
+let timeDiv = document.getElementById("time")
+let timeCounter = 11
 let trueCounter = 0
 let falseCounter = 0
 let trueAnswer = document.getElementById("true")
@@ -25,6 +29,19 @@ const getData = function () {
     }
 }
 
+const time = function () {
+    timeCounter -= 1
+    timeDiv.innerText = "Часу залишилося " + timeCounter
+    timeout = setTimeout(time, 1000)
+    if (timeCounter === 0) {
+        
+        checkResalt()
+        return
+    }
+}
+
+time()
+
 const refresh = function (data) {
     first.innerText = data.first
     second.innerText = data.second
@@ -35,18 +52,23 @@ const refresh = function (data) {
 let data = getData()
 refresh(data)
 
-const checkResalt = function() {
+const checkResalt = function () {
     if (data.second + data.first == input.value) {
+        timeCounter = 11
+        time()
         trueCounter += 1
         trueAnswer.innerText = "Правильних відповідей : " + trueCounter
         data = getData()
+        clearTimeout(timeout)
         refresh(data)
     }
     else {
+        timeCounter = 11
+        time()
         falseCounter += 1
         falseAnswer.innerText = "НЕ правильних відповідей : " + falseCounter
-        randomFirst = Math.floor(Math.random() * 1000 % 10 + 1)
         data = getData()
+        clearTimeout(timeout)
         refresh(data)
     }
 }

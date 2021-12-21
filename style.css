@@ -1,14 +1,29 @@
-/* #id {
+#id {
     background-image: url("cat.jpg");
-} */
+}
 #input {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#plus {
+.conteiner {
+    height: 90vh;
+    width: 90vw;
+}
+.top {
     display: flex;
     justify-content: center;
-    align-items: centers;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.numbers {
+    display: flex;
+    flex-direction: row;
+    margin-right: 6px;
 }
