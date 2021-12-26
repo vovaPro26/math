@@ -1,32 +1,42 @@
 <!DOCTYPE html>
-<html id="id">
-    <head>
-        <meta charset="UTF-8">
-        <title>Math</title>
-        <link href="style.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <div class="conteiner">
-            <div class="top">
-                <h1>Математика Для Улянки</h1>
-            </div>
-            <div class="input">
-                <div class="numbers">
-                    <h1 id="first"></h1>
-                    <h1 id="plus">+</h1>
-                    <h1 id="second"></h1>
-                    <h1>=</h1>
-                </div>
-                <input id="input"/>
-            </div>
-            <div class="time">
-                <div id="time"></div>
-            </div>
-            <div class="true-or-false">
-                <div id="true"></div>
-                <div id="false"></div>
-            </div>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Math</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body id="id">
+    <div id="start" class="start">
+        <div>Плюс</div>
+        <input name="sign" value="plus" type="checkbox" />
+        <div>Мінус</div>
+        <input name="sign" value="minus" type="checkbox" />
+        <button onclick="startTest()">Почати</button>
+    </div>
+    <div id="conteiner" class="conteiner hiden">
+        <div class="top">
+            <h1>Математика Для Улянки</h1>
         </div>
-    </body>
-    <script src="index.js"></script>
+        <div class="input">
+            <div class="numbers">
+                <h1 id="first"></h1>
+                <h1 id="sign"></h1>
+                <h1 id="second"></h1>
+                <h1>=</h1>
+            </div>
+            <input id="input" />
+        </div>
+        <div class="time">
+            <div id="time"></div>
+        </div>
+        <div class="true-or-false">
+            <div id="true"></div>
+            <div id="false"></div>
+        </div>
+    </div>
+</body>
+<script src="index.js"></script>
+
 </html>

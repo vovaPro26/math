@@ -1,5 +1,7 @@
 #id {
-    background-image: url("cat.jpg");
+    background-color: skyblue;
+    width: 100%;
+    height: 100%;
 }
 #input {
     display: flex;
@@ -23,11 +25,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: -185px;
+    font-size: 50px;
+    color: darkred;
 }
 .input {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: -165px;
 }
 .numbers {
     display: flex;
@@ -37,3 +43,51 @@
     color: purple;
     font-size: 100px;
 }
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: blueviolet
+}
+#true {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: green;
+    font-size: 5em;
+}
+#false {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+}
+
+   @keyframes pulsate {
+    50% { color: red; text-shadow: 0 -1px darkred, 0 0 5px red, 0 0 8px red; }
+   }
+   #false {
+     color: red;
+
+     animation: pulsate 1.2s linear infinite;
+   }
+   @keyframes pulsate2 {
+    50% { color: green; text-shadow: 0 -1px lime, 0 0 5px green, 0 0 8px green; }
+   }
+   #true {
+     color: green;
+
+     animation: pulsate2 1.2s linear infinite;
+   }
+   @keyframes pulsate3 {
+    50% { color: green; text-shadow: 0 -1px lime, 0 0 5px green, 0 0 8px green; }
+   }
+   .time-puls {
+     color: green;
+
+     animation: pulsate3 1.2s linear infinite;
+   }
+   .hiden {
+       visibility: hidden;
+   }

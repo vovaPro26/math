@@ -1,4 +1,8 @@
-
+let MOrP
+let conteiner = document.getElementById("conteiner")
+let start = document.getElementById("start")
+let plusChange = document.getElementById("plus")
+let minusChange = document.getElementById("minus")
 let timeout
 let timeDiv = document.getElementById("time")
 let timeCounter = 11
@@ -7,7 +11,7 @@ let falseCounter = 0
 let trueAnswer = document.getElementById("true")
 let falseAnswer = document.getElementById("false")
 let first = document.getElementById("first")
-let plus = document.getElementById("plus")
+let sine = document.getElementById("sign")
 let second = document.getElementById("second")
 let input = document.getElementById("input")
 
@@ -18,16 +22,33 @@ const randomSum = function (from, to) {
     console.log(random)
     return random
 }
-const getData = function () {
+const getDataPlus = function () {
     let sum = randomSum(2, 10)
     let first = randomSum(1, sum - 1)
     let second = sum - first
+    let sign = "+"
+    const checker = res => first + second === res
     return {
-        sum,
         first,
-        second
+        second,
+        sign,
+        checker
     }
 }
+
+const getDataM = function () {
+    let first = randomSum(2, 10)
+    let second = randomSum(1, first - 1)
+    let sign = "-"
+    const checker = res => first - second === res
+    return {
+        sign,
+        first,
+        second,
+        checker
+    }
+}
+
 
 const time = function () {
     timeCounter -= 1
@@ -39,28 +60,65 @@ const time = function () {
         return
     }
 }
-
-time()
+let data
+const startTest = function () {
+    start.classList.add("hiden")
+    conteiner.classList.remove("hiden")
+    checkBoxer()
+    data = getData()
+    time()
+    refresh(data)
+}
+// time()
 
 const refresh = function (data) {
     first.innerText = data.first
     second.innerText = data.second
+    sine.innerText = data.sign
     input.value = ""
     input.focus()
 }
+// const refreshM = function (data2) {
+//     first.innerText = data2.first
+//     second.innerText = data2.second
+//     sine.innerText = data2.sign
+//     input.value = ""
+//     input.focus()
+// }
+let sineMasiv = []
+const checkBoxer = function () {
+    const signCheckBoxes = document.getElementsByName("sign")
+    for (let i = 0; i <= signCheckBoxes.length - 1; i++) {
+        if (signCheckBoxes[i].checked) {
+            sineMasiv.push(signCheckBoxes[i].value)
+        }
+    }
 
-let data = getData()
-refresh(data)
+}
+const getData = function () {
+    let index = randomSum(0,sineMasiv.length - 1)
+    const signMasiveIndex = sineMasiv[index];
+    if(signMasiveIndex==="minus"){
+        return getDataM()
+    }
+    if(signMasiveIndex==="plus"){
+        return getDataPlus()
+    }
+}
+
+
 
 const checkResalt = function () {
-    if (data.second + data.first == input.value) {
+    const res = parseInt(input.value)
+    if (data.checker(res)) {
         timeCounter = 11
         time()
         trueCounter += 1
         trueAnswer.innerText = "Правильних відповідей : " + trueCounter
-        data = getData()
         clearTimeout(timeout)
+        data = getData()
         refresh(data)
+
     }
     else {
         timeCounter = 11
