@@ -66,6 +66,11 @@ const startTest = function () {
     conteiner.classList.remove("hiden")
     checkBoxer()
     data = getData()
+    if(data===false){
+        start.classList.remove("hiden")
+        conteiner.classList.add("hiden")
+        return
+    }
     time()
     refresh(data)
 }
@@ -96,13 +101,19 @@ const checkBoxer = function () {
 
 }
 const getData = function () {
+    let count = 0
     let index = randomSum(0,sineMasiv.length - 1)
     const signMasiveIndex = sineMasiv[index];
     if(signMasiveIndex==="minus"){
+        count ++
         return getDataM()
     }
     if(signMasiveIndex==="plus"){
+        count++
         return getDataPlus()
+    }
+    if(count === 0) {
+        return false
     }
 }
 
