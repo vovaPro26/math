@@ -14,6 +14,8 @@ let first = document.getElementById("first")
 let sine = document.getElementById("sign")
 let second = document.getElementById("second")
 let input = document.getElementById("input")
+let howManyExamples = document.getElementById("examplesSolved")
+let timeoutStop
 
 const randomSum = function (from, to) {
     let range = to - from + 1
@@ -53,10 +55,13 @@ const getDataM = function () {
 const time = function () {
     timeCounter -= 1
     timeDiv.innerText = "Часу залишилося " + timeCounter
-    timeout = setTimeout(time, 1000)
+    clearTimeout(timeout)
     if (timeCounter === 0) {
-        
         checkResalt()
+        return
+    }
+    timeout = setTimeout(time, 1000)
+    if(timeoutStop){
         return
     }
 }
@@ -66,15 +71,16 @@ const startTest = function () {
     conteiner.classList.remove("hiden")
     checkBoxer()
     data = getData()
-    if(data===false){
+    if (data === false) {
         start.classList.remove("hiden")
         conteiner.classList.add("hiden")
         return
     }
+    clearTimeout(timeout)
     time()
     refresh(data)
 }
-// time()
+
 
 const refresh = function (data) {
     first.innerText = data.first
@@ -89,8 +95,8 @@ const refresh = function (data) {
 //     sine.innerText = data2.sign
 //     input.value = ""
 //     input.focus()
-// }
-let sineMasiv = []
+// } 
+let sineMasiv = []      
 const checkBoxer = function () {
     const signCheckBoxes = document.getElementsByName("sign")
     for (let i = 0; i <= signCheckBoxes.length - 1; i++) {
@@ -102,42 +108,61 @@ const checkBoxer = function () {
 }
 const getData = function () {
     let count = 0
-    let index = randomSum(0,sineMasiv.length - 1)
+    let index = randomSum(0, sineMasiv.length - 1)
     const signMasiveIndex = sineMasiv[index];
-    if(signMasiveIndex==="minus"){
-        count ++
+    if (signMasiveIndex === "minus") {
+        count++
         return getDataM()
     }
-    if(signMasiveIndex==="plus"){
+    if (signMasiveIndex === "plus") {
         count++
         return getDataPlus()
     }
-    if(count === 0) {
+    if (count === 0) {
+        alert("Стоп, вибери шось")
         return false
     }
 }
 
-
+const exersise = function () {
+    timeoutStop = true
+    clearTimeout(timeout)
+    falseAnswer.innerText = ""
+    trueAnswer.innerText = ""
+    input.value = ""
+    falseCounter = 0
+    trueCounter = 0
+    start.classList.remove("hiden")
+    conteiner.classList.add("hiden")
+    return 
+}
 
 const checkResalt = function () {
     const res = parseInt(input.value)
-    if (data.checker(res)) {
+    if (data.checker(res)) { 
         timeCounter = 11
-        time()
         trueCounter += 1
         trueAnswer.innerText = "Правильних відповідей : " + trueCounter
+        if (howManyExamples.value == falseCounter + trueCounter) {
+            exersise()
+            return
+        }
         clearTimeout(timeout)
+        time()
         data = getData()
         refresh(data)
-
     }
     else {
         timeCounter = 11
-        time()
         falseCounter += 1
         falseAnswer.innerText = "НЕ правильних відповідей : " + falseCounter
-        data = getData()
+        if (howManyExamples.value == falseCounter + trueCounter) {
+            exersise()
+            return
+        }
         clearTimeout(timeout)
+        time()
+        data = getData()
         refresh(data)
     }
 }
