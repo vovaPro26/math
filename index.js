@@ -17,6 +17,20 @@ let input = document.getElementById("input")
 let howManyExamples = document.getElementById("examplesSolved")
 let timeoutStop
 
+const reset = function() {
+    // clearTimeout(timeout)
+    falseAnswer.innerText = ""
+    trueAnswer.innerText = ""
+    falseAnswer.innerText = ""
+    trueAnswer.innerText = ""
+    input.value = ""
+    falseCounter = 0
+    trueCounter = 0
+    start.classList.remove("hiden")
+    conteiner.classList.add("hiden")
+    return 
+}
+
 const randomSum = function (from, to) {
     let range = to - from + 1
     let random = Math.floor(Math.random() * 1000)
@@ -25,7 +39,13 @@ const randomSum = function (from, to) {
     return random
 }
 const getDataPlus = function () {
-    let sum = randomSum(2, 10)
+    let skladFrom = document.getElementById("skladFrom")
+    if(skladFrom.value === "1") {
+        reset()
+        return
+    }
+    let skladTo = document.getElementById("skladTo")
+    let sum = randomSum(parseInt(skladFrom.value), parseInt(skladTo.value))
     let first = randomSum(1, sum - 1)
     let second = sum - first
     let sign = "+"
@@ -39,7 +59,13 @@ const getDataPlus = function () {
 }
 
 const getDataM = function () {
-    let first = randomSum(2, 10)
+    let skladFrom = document.getElementById("skladFrom")
+    if(skladFrom.value === "1") {
+        reset()
+        return
+    }
+    let skladTo = document.getElementById("skladTo")
+    let first = randomSum(parseInt(skladFrom.value), parseInt(skladTo.value))
     let second = randomSum(1, first - 1)
     let sign = "-"
     const checker = res => first - second === res
@@ -65,21 +91,6 @@ const time = function () {
         return
     }
 }
-let data
-const startTest = function () {
-    start.classList.add("hiden")
-    conteiner.classList.remove("hiden")
-    checkBoxer()
-    data = getData()
-    if (data === false) {
-        start.classList.remove("hiden")
-        conteiner.classList.add("hiden")
-        return
-    }
-    clearTimeout(timeout)
-    time()
-    refresh(data)
-}
 
 
 const refresh = function (data) {
@@ -90,7 +101,7 @@ const refresh = function (data) {
     input.focus()
 }
 // const refreshM = function (data2) {
-//     first.innerText = data2.first
+    //     first.innerText = data2.first
 //     second.innerText = data2.second
 //     sine.innerText = data2.sign
 //     input.value = ""
@@ -98,6 +109,7 @@ const refresh = function (data) {
 // } 
 let sineMasiv = []      
 const checkBoxer = function () {
+    sineMasiv = []
     const signCheckBoxes = document.getElementsByName("sign")
     for (let i = 0; i <= signCheckBoxes.length - 1; i++) {
         if (signCheckBoxes[i].checked) {
@@ -124,17 +136,11 @@ const getData = function () {
     }
 }
 
+
+
 const exersise = function () {
     timeoutStop = true
-    clearTimeout(timeout)
-    falseAnswer.innerText = ""
-    trueAnswer.innerText = ""
-    input.value = ""
-    falseCounter = 0
-    trueCounter = 0
-    start.classList.remove("hiden")
-    conteiner.classList.add("hiden")
-    return 
+    reset()
 }
 
 const checkResalt = function () {
@@ -167,9 +173,32 @@ const checkResalt = function () {
     }
 }
 
+let data
+const startTest = function () {
+    start.classList.add("hiden")
+    conteiner.classList.remove("hiden")
+    checkBoxer()
+    data = getData()
+    if (data === false) {
+        start.classList.remove("hiden")
+        conteiner.classList.add("hiden")
+        return
+    }
+    clearTimeout(timeout)
+    time()
+    refresh(data)
+}
+
 const keyDown = function (e) {
     if (e.keyCode === 13) {
         checkResalt()
     }
 }
+const keyDownFirst = function (e) {
+    if (e.keyCode === 13) {
+        start()
+    }
+}
+let startButomn
+// .onkeydown = keyDownFirst;
 input.onkeydown = keyDown;
