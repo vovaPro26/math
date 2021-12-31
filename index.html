@@ -9,23 +9,26 @@
 
 <body id="id">
     <div id="start" class="start">
-        <div class="plus">
-            <div>Плюс</div>
-            <input class="first-check" name="sign" value="plus" type="checkbox" />
+        <div class="checkBox-conteiner">
+            <div class="sign-container">
+                <div>Плюс</div>
+                <input class="first-check" name="sign" value="plus" type="checkbox" />
+            </div>
+            <div class="sign-container">
+                <div>Мінус</div>
+                <input class="second-check" name="sign" value="minus" type="checkbox" />
+            </div>
         </div>
-        <div class="minus">
-            <div>Мінус</div>
-            <input class="second-check" name="sign" value="minus" type="checkbox" />
-        </div>
+
         <div>
             <div>Прикладів: </div>
             <input id="examplesSolved" />
         </div>
         <div>
             <div>Від: </div>
-            <input id="skladFrom" >
+            <input id="skladFrom">
             <div>До: </div>
-            <input id="skladTo" >
+            <input id="skladTo">
         </div>
         <button id="startButomn" class="start-butomn" onclick="startTest()">Почати</button>
     </div>

@@ -62,6 +62,7 @@ const getDataM = function () {
     let skladFrom = document.getElementById("skladFrom")
     if(skladFrom.value === "1") {
         reset()
+        alert("Не не не. Дуже просто")
         return
     }
     let skladTo = document.getElementById("skladTo")
@@ -194,11 +195,16 @@ const keyDown = function (e) {
         checkResalt()
     }
 }
-const keyDownFirst = function (e) {
+const keyDownStart = function (e) {
     if (e.keyCode === 13) {
-        start()
+        startTest()
     }
 }
 let startButomn
-// .onkeydown = keyDownFirst;
+
+
+
+
+let skladTo = document.getElementById("skladTo")
+skladTo.onkeydown = keyDownStart;
 input.onkeydown = keyDown;
