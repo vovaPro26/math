@@ -17,10 +17,11 @@ let input = document.getElementById("input")
 let howManyExamples = document.getElementById("examplesSolved")
 let timeoutStop
 
+
+let stopAll
 const reset = function() {
     // clearTimeout(timeout)
-    falseAnswer.innerText = ""
-    trueAnswer.innerText = ""
+    stopAll = true
     falseAnswer.innerText = ""
     trueAnswer.innerText = ""
     input.value = ""
@@ -39,12 +40,23 @@ const randomSum = function (from, to) {
     return random
 }
 const getDataPlus = function () {
+    let skladTo = document.getElementById("skladTo")
     let skladFrom = document.getElementById("skladFrom")
-    if(skladFrom.value === "1") {
+    let skladFromValue = parseInt(skladFrom.value)
+    let skladToValue = parseInt(skladTo.value)
+    skladFromValue = Math.floor(skladFromValue)
+    skladToValue = Math.floor(skladToValue)
+    if(skladFromValue <= 1 || skladToValue <= 1) {
         reset()
+        if(skladToValue <= 1) skladTo.focus()
+        if(skladFromValue <= 1) skladFrom.focus()
+        alert("Не не не. Дуже просто")
         return
     }
-    let skladTo = document.getElementById("skladTo")
+    if(skladToValue < skladFromValue) {
+        reset()
+        alert("Число яке вказано у Від не повинно бути більше ніж число яке вказане в До")
+    }
     let sum = randomSum(parseInt(skladFrom.value), parseInt(skladTo.value))
     let first = randomSum(1, sum - 1)
     let second = sum - first
@@ -60,12 +72,22 @@ const getDataPlus = function () {
 
 const getDataM = function () {
     let skladFrom = document.getElementById("skladFrom")
-    if(skladFrom.value === "1") {
+    let skladTo = document.getElementById("skladTo")
+    let skladFromValue = parseInt(skladFrom.value)
+    let skladToValue = parseInt(skladTo.value)
+    skladFromValue = Math.floor(skladFromValue)
+    skladToValue = Math.floor(skladToValue)
+    if(skladFromValue <= 1 || skladToValue <= 1) {
         reset()
+        if(skladToValue <= 1) skladTo.focus()
+        if(skladFromValue <= 1) skladFrom.focus()
         alert("Не не не. Дуже просто")
         return
     }
-    let skladTo = document.getElementById("skladTo")
+    if(skladToValue < skladFromValue ) {
+        reset()
+        alert("Число яке вказано у Від не повинно бути більше ніж число яке вказане в До")
+    }
     let first = randomSum(parseInt(skladFrom.value), parseInt(skladTo.value))
     let second = randomSum(1, first - 1)
     let sign = "-"
@@ -183,6 +205,9 @@ const startTest = function () {
     if (data === false) {
         start.classList.remove("hiden")
         conteiner.classList.add("hiden")
+        return
+    }
+    if(stopAll) {
         return
     }
     clearTimeout(timeout)
