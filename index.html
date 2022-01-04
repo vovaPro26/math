@@ -8,15 +8,15 @@
 </head>
 
 <body id="id">
-    <div id="start" class="start">
+    <div id="startPage" class="start">
         <div class="checkBox-conteiner">
             <div class="sign-container">
                 <div>Плюс</div>
-                <input class="first-check" name="sign" value="plus" type="checkbox" />
+                <input id="plusCheck" class="first-check" name="sign" value="plus" type="checkbox" />
             </div>
             <div class="sign-container">
                 <div>Мінус</div>
-                <input class="second-check" name="sign" value="minus" type="checkbox" />
+                <input id="minusCheck" class="second-check" name="sign" value="minus" type="checkbox" />
             </div>
         </div>
 
@@ -32,32 +32,55 @@
         </div>
         <button id="startButomn" class="start-butomn" onclick="startTest()">Почати</button>
     </div>
-    <div id="conteiner" class="conteiner hiden">
-        <div id="finish-hiden">
-            <div class="top">
-                <h1>Математика Для Улянки</h1>
+    <div id="testPage" class="conteiner hiden">
+        <div class="top">
+            <h1>Математика Для Улянки</h1>
+        </div>
+        <div class="input">
+            <div class="numbers">
+                <h1 id="first"></h1>
+                <h1 id="sign"></h1>
+                <h1 id="second"></h1>
+                <h1>=</h1>
             </div>
-            <div class="input">
-                <div class="numbers">
-                    <h1 id="first"></h1>
-                    <h1 id="sign"></h1>
-                    <h1 id="second"></h1>
-                    <h1>=</h1>
-                </div>
-                <input id="input" />
-            </div>
-            <div class="time">
-                <div id="time"></div>
-            </div>
+            <input id="input" />
+        </div>
+        <div class="time">
+            <div id="time"></div>
         </div>
         <div class="true-or-false">
-            <div id="true"></div>
-            <div id="false"></div>
+            <div class="correct-answer" id="true"></div>
+            <div class="wrong-answer" id="false"></div>
         </div>
-        <div id="answAndButt" class="hiden">
-            <div id="allAnswers"></div>
-            <button id="finishButton"></button>
+    </div>
+    <div id="resultPage" class="hiden">
+        <div class="true-or-false">
+            <div class="correct-answer">
+                <span>Правильних відповідей:</span>
+                <span id="answCorrect"></span>
+            </div>
+            <div class="wrong-answer">
+                <span>Неправильних відповідей:</span>
+                <span id="anwswWrong"></span>
+            </div>
         </div>
+        <div class="answerAndMark">
+            <div>
+                <span>Всього відповідей:</span>
+                <span id="allAnswers"></span>
+            </div>
+            <div>
+
+                <span>
+                    Оцінка:
+                </span>
+                <span id="mark"></span>
+            </div>
+        </div>
+        <div class="finish-butomn">
+            <button id="finishButton" onclick="lastContinue()">Продовжити</button>
+        </div>
+
     </div>
 </body>
 <script src="index.js"></script>

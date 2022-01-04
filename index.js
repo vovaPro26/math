@@ -1,8 +1,8 @@
 let MOrP
-let conteiner = document.getElementById("conteiner")
-let start = document.getElementById("start")
-let plusChange = document.getElementById("plus")
-let minusChange = document.getElementById("minus")
+let testPage = document.getElementById("testPage")
+let startPage = document.getElementById("startPage")
+// let plusChange = document.getElementById("plus")
+// let minusChange = document.getElementById("minus")
 let timeout
 let timeDiv = document.getElementById("time")
 let timeCounter = 11
@@ -14,9 +14,78 @@ let first = document.getElementById("first")
 let sine = document.getElementById("sign")
 let second = document.getElementById("second")
 let input = document.getElementById("input")
-let howManyExamples = document.getElementById("examplesSolved")
 let timeoutStop
+let mark = document.getElementById("mark")
 
+let defaltSettings = {
+    plus: true,
+    minus: true,
+    howManyExamples: 100,
+    from: 2,
+    to: 10
+}
+
+
+const setSettings = function(sets) {
+    let plusCheck = document.getElementById("plusCheck")
+    plusCheck.checked = sets.plus
+    let minusCheck = document.getElementById("minusCheck")
+    minusCheck.checked = sets.minus
+    let howManyExamples = document.getElementById("examplesSolved")
+    howManyExamples.value = sets.howManyExamples
+    let skladFrom = document.getElementById("skladFrom")
+    skladFrom.value = sets.from
+    let skladTo = document.getElementById("skladTo")
+    skladTo.value = sets.to
+}
+
+setSettings(defaltSettings)
+
+
+let getSettings = function() {
+    let plusCheck = document.getElementById("plusCheck")
+    let minusCheck = document.getElementById("minusCheck")
+    let howManyExamples = document.getElementById("examplesSolved")
+    let skladFrom = document.getElementById("skladFrom")
+    let skladTo = document.getElementById("skladTo")
+    
+    let plusChecker = plusCheck.checked
+    let minusChecker = minusCheck.checked
+    let examples = parseInt(howManyExamples.value)
+    let skladFromValue = parseInt(skladFrom.value)
+    let skladToValue = parseInt(skladTo.value)
+    let newSettings = {
+        plus: plusChecker,
+        minus: minusChecker,
+        howManyExamples: examples,
+        from: skladFromValue,
+        to: skladToValue
+    }
+    return newSettings
+}
+
+let allSettings = defaltSettings
+
+// let resultModel = {
+//     correctAnswers: 0,
+//     wrongAnswers: 0,
+//     allAnswers: 0,
+//     mark: 0
+// }
+
+const setResult = function(res) {
+    let corectAnswers = document.getElementById("answCorrect")
+    let wrongAnswers = document.getElementById("anwswWrong")
+    let allAnswers = document.getElementById("allAnswers")
+    let mark = document.getElementById("mark")
+
+    corectAnswers.innerText = res.correctAnswers
+    wrongAnswers.innerText = res.wrongAnswers
+    allAnswers.innerText = res.allAnswers
+    mark.innerText = res.mark
+}
+
+// setResult(resultModel)
 
 let stopAll
 const reset = function() {
@@ -27,8 +96,8 @@ const reset = function() {
     input.value = ""
     falseCounter = 0
     trueCounter = 0
-    start.classList.remove("hiden")
-    conteiner.classList.add("hiden")
+    startPage.classList.remove("hiden")
+    testPage.classList.add("hiden")
     return 
 }
 
@@ -40,16 +109,16 @@ const randomSum = function (from, to) {
     return random
 }
 const getDataPlus = function () {
-    let skladTo = document.getElementById("skladTo")
-    let skladFrom = document.getElementById("skladFrom")
-    let skladFromValue = parseInt(skladFrom.value)
-    let skladToValue = parseInt(skladTo.value)
+    // skladTo = document.getElementById("skladTo")
+    // skladFrom = document.getElementById("skladFrom")
+    // let skladFromValue = parseInt(skladFrom.value)
+    // let skladToValue = parseInt(skladTo.value)
+    let skladFromValue = allSettings.from
+    let skladToValue = allSettings.to
     skladFromValue = Math.floor(skladFromValue)
     skladToValue = Math.floor(skladToValue)
     if(skladFromValue <= 1 || skladToValue <= 1) {
         reset()
-        if(skladToValue <= 1) skladTo.focus()
-        if(skladFromValue <= 1) skladFrom.focus()
         alert("Не не не. Дуже просто")
         return
     }
@@ -71,10 +140,8 @@ const getDataPlus = function () {
 }
 
 const getDataM = function () {
-    let skladFrom = document.getElementById("skladFrom")
-    let skladTo = document.getElementById("skladTo")
-    let skladFromValue = parseInt(skladFrom.value)
-    let skladToValue = parseInt(skladTo.value)
+    let skladFromValue = allSettings.from
+    let skladToValue = allSettings.to
     skladFromValue = Math.floor(skladFromValue)
     skladToValue = Math.floor(skladToValue)
     if(skladFromValue <= 1 || skladToValue <= 1) {
@@ -102,6 +169,9 @@ const getDataM = function () {
 
 
 const time = function () {
+    if(timeoutStop){
+        return
+    }
     timeCounter -= 1
     timeDiv.innerText = "Часу залишилося " + timeCounter
     clearTimeout(timeout)
@@ -110,9 +180,6 @@ const time = function () {
         return
     }
     timeout = setTimeout(time, 1000)
-    if(timeoutStop){
-        return
-    }
 }
 
 
@@ -159,11 +226,33 @@ const getData = function () {
     }
 }
 
+let resultPage = document.getElementById("resultPage")
+let allAnswers = document.getElementById("allAnswers")
 
 
 const exersise = function () {
     timeoutStop = true
-    reset()
+    let markResalt = trueCounter * 12 / allSettings.howManyExamples
+    markResalt = Math.floor(markResalt)
+    if(markResalt > 12) {
+        markResalt -= 1
+    }
+
+    let resultModel = {
+        correctAnswers: trueCounter,
+        wrongAnswers: falseCounter,
+        allAnswers: allSettings.howManyExamples,
+        mark: markResalt
+    }
+
+    // mark.innerText = "Оцінка: " + markResalt
+    testPage.classList.add("hiden")
+    resultPage.classList.remove("hiden")
+    setResult(resultModel)
+    // allAnswers.innerText = "Всього прикладів : " + allSettings.howManyExamples
+    // result.classList.remove("hiden")
+    // reset()
+    
 }
 
 const checkResalt = function () {
@@ -172,7 +261,7 @@ const checkResalt = function () {
         timeCounter = 11
         trueCounter += 1
         trueAnswer.innerText = "Правильних відповідей : " + trueCounter
-        if (howManyExamples.value == falseCounter + trueCounter) {
+        if (allSettings.howManyExamples === falseCounter + trueCounter) {
             exersise()
             return
         }
@@ -185,7 +274,7 @@ const checkResalt = function () {
         timeCounter = 11
         falseCounter += 1
         falseAnswer.innerText = "НЕ правильних відповідей : " + falseCounter
-        if (howManyExamples.value == falseCounter + trueCounter) {
+        if (allSettings.howManyExamples === falseCounter + trueCounter) {
             exersise()
             return
         }
@@ -198,13 +287,15 @@ const checkResalt = function () {
 
 let data
 const startTest = function () {
-    start.classList.add("hiden")
-    conteiner.classList.remove("hiden")
+    allSettings = getSettings()
+    timeoutStop = false
+    startPage.classList.add("hiden")
+    testPage.classList.remove("hiden")
     checkBoxer()
     data = getData()
     if (data === false) {
-        start.classList.remove("hiden")
-        conteiner.classList.add("hiden")
+        startPage.classList.remove("hiden")
+        testPage.classList.add("hiden")
         return
     }
     if(stopAll) {
@@ -227,9 +318,22 @@ const keyDownStart = function (e) {
 }
 let startButomn
 
+const lastContinue = function() {
+    falseAnswer.innerText = ""
+    trueAnswer.innerText = ""
+    falseCounter = 0
+    trueCounter = 0
+    testPage.classList.remove("hiden")
+    testPage.classList.add("hiden")
+    startPage.classList.remove("hiden")
+    resultPage.classList.add("hiden")
+    // skladTo.value = ""
+    // skladFrom.value = ""
+    // howManyExamples.value = ""
+    // howManyExamples.focus()
+}
 
 
-
-let skladTo = document.getElementById("skladTo")
+skladTo = document.getElementById("skladTo")
 skladTo.onkeydown = keyDownStart;
 input.onkeydown = keyDown;
