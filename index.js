@@ -1,8 +1,6 @@
 let MOrP
 let testPage = document.getElementById("testPage")
 let startPage = document.getElementById("startPage")
-// let plusChange = document.getElementById("plus")
-// let minusChange = document.getElementById("minus")
 let timeout
 let timeDiv = document.getElementById("time")
 let timeCounter = 11
@@ -66,12 +64,6 @@ let getSettings = function() {
 
 let allSettings = defaltSettings
 
-// let resultModel = {
-//     correctAnswers: 0,
-//     wrongAnswers: 0,
-//     allAnswers: 0,
-//     mark: 0
-// }
 
 const setResult = function(res) {
     let corectAnswers = document.getElementById("answCorrect")
@@ -85,11 +77,8 @@ const setResult = function(res) {
     mark.innerText = res.mark
 }
 
-// setResult(resultModel)
-
 let stopAll
 const reset = function() {
-    // clearTimeout(timeout)
     stopAll = true
     falseAnswer.innerText = ""
     trueAnswer.innerText = ""
@@ -109,10 +98,6 @@ const randomSum = function (from, to) {
     return random
 }
 const getDataPlus = function () {
-    // skladTo = document.getElementById("skladTo")
-    // skladFrom = document.getElementById("skladFrom")
-    // let skladFromValue = parseInt(skladFrom.value)
-    // let skladToValue = parseInt(skladTo.value)
     let skladFromValue = allSettings.from
     let skladToValue = allSettings.to
     skladFromValue = Math.floor(skladFromValue)
@@ -190,13 +175,6 @@ const refresh = function (data) {
     input.value = ""
     input.focus()
 }
-// const refreshM = function (data2) {
-    //     first.innerText = data2.first
-//     second.innerText = data2.second
-//     sine.innerText = data2.sign
-//     input.value = ""
-//     input.focus()
-// } 
 let sineMasiv = []      
 const checkBoxer = function () {
     sineMasiv = []
@@ -245,13 +223,9 @@ const exersise = function () {
         mark: markResalt
     }
 
-    // mark.innerText = "Оцінка: " + markResalt
     testPage.classList.add("hiden")
     resultPage.classList.remove("hiden")
     setResult(resultModel)
-    // allAnswers.innerText = "Всього прикладів : " + allSettings.howManyExamples
-    // result.classList.remove("hiden")
-    // reset()
     
 }
 
@@ -273,7 +247,7 @@ const checkResalt = function () {
     else {
         timeCounter = 11
         falseCounter += 1
-        falseAnswer.innerText = "НЕ правильних відповідей : " + falseCounter
+        falseAnswer.innerText = "Неправильних відповідей : " + falseCounter
         if (allSettings.howManyExamples === falseCounter + trueCounter) {
             exersise()
             return
@@ -327,12 +301,7 @@ const lastContinue = function() {
     testPage.classList.add("hiden")
     startPage.classList.remove("hiden")
     resultPage.classList.add("hiden")
-    // skladTo.value = ""
-    // skladFrom.value = ""
-    // howManyExamples.value = ""
-    // howManyExamples.focus()
 }
-
 
 skladTo = document.getElementById("skladTo")
 skladTo.onkeydown = keyDownStart;

@@ -7,35 +7,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2em;
-    font-size: 150px;
+    width: 20vw;
+    font-size: 18vw;
     font-family: 'Times New Roman', Times, serif;
-    height: 1em;
+    height: 15vw;
     background-color: purple;
     border: transparent;
     border-radius: 5px;
     color: pink;
 }
 
+.body {
+    margin: 0px;
+    padding: 0px;
+}
+
 .start {
-    /* width: 90vw;
-    height: 40vh; */
     display: flex;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: magenta;
-    font-size: large;
+    font-size: 5vw;
     align-items: center;
+    width: 50%;
+    margin: auto;
     flex-direction: column;
+}
+
+.start-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 }
 
 .checkBox-conteiner {
     display: flex;
     flex-direction: column;
-    /* font-family: monospace; */
     width: 177px;
     margin-bottom: 10px;
-    /* color: tomato; */
-    /* font-size: xx-large; */
 }
 
 .sign-container {
@@ -54,15 +63,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: -185px;
-    font-size: 50px;
+    font-size: 7vw;
     color: darkred;
 }
 .input {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: -165px;
 }
 .numbers {
     display: flex;
@@ -70,13 +77,13 @@
     margin-right: 6px;
     font-family:'Times New Roman', Times, serif;
     color: purple;
-    font-size: 100px;
+    font-size: 18vw;
 }
 .time {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 7vw;
     color: blueviolet
 }
 .answerAndMark {
@@ -84,7 +91,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-size: 4em;
+    font-size: 7vw;
     color: blueviolet;
 }
 .finish-butomn {
@@ -97,13 +104,22 @@
     justify-content: center;
     align-items: center;
     color: green;
-    font-size: 5em;
+    font-size: 7vw;
 }
+.startInputs {
+    width: 20vw;
+    height: 6vh;
+    border-radius: 15px;
+    border: solid 1px red;
+    font-size: 5vw;
+}
+
+
 .wrong-answer {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 5em;
+    font-size: 7vw;
     
 }
    @keyframes pulsate {
