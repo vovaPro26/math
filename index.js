@@ -234,7 +234,7 @@ const checkResalt = function () {
     if (data.checker(res)) { 
         timeCounter = 11
         trueCounter += 1
-        trueAnswer.innerText = "Правильних відповідей : " + trueCounter
+        trueAnswer.innerText = "Правильно : " + trueCounter
         if (allSettings.howManyExamples === falseCounter + trueCounter) {
             exersise()
             return
@@ -247,7 +247,7 @@ const checkResalt = function () {
     else {
         timeCounter = 11
         falseCounter += 1
-        falseAnswer.innerText = "Неправильних відповідей : " + falseCounter
+        falseAnswer.innerText = "Неправильно : " + falseCounter
         if (allSettings.howManyExamples === falseCounter + trueCounter) {
             exersise()
             return

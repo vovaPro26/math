@@ -104,7 +104,7 @@
     justify-content: center;
     align-items: center;
     color: green;
-    font-size: 5.9vw;
+    font-size: 6vw;
 }
 .startInputs {
     width: 20vw;
@@ -119,7 +119,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 5.9vw;
+    font-size: 6vw;
     
 }
    @keyframes pulsate {
