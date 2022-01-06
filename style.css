@@ -13,7 +13,7 @@
     height: 15vw;
     background-color: purple;
     border: transparent;
-    border-radius: 5px;
+    border-radius: 7px;
     color: pink;
 }
 
@@ -104,14 +104,14 @@
     justify-content: center;
     align-items: center;
     color: green;
-    font-size: 7vw;
+    font-size: 6.5vw;
 }
 .startInputs {
     width: 20vw;
-    height: 6vh;
-    border-radius: 15px;
+    height: 6vw;
+    border-radius: 5px;
     border: solid 1px red;
-    font-size: 5vw;
+    font-size: 4vw;
 }
 
 
@@ -119,7 +119,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 7vw;
+    font-size: 6.5vw;
     
 }
    @keyframes pulsate {
