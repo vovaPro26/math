@@ -8,6 +8,7 @@
     <meta content='width' name='MobileOptimized' />
     <meta content='yes' name='apple-mobile-web-app-capable' />
     <title>Math</title>
+    <link href="checkbox.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
 </head>
 
@@ -16,11 +17,11 @@
         <div class="checkBox-conteiner">
             <div class="sign-container">
                 <div>Плюс</div>
-                <input id="plusCheck" class="first-check" name="sign" value="plus" type="checkbox" />
+                <input id="plusCheck" class="flipswitch" name="sign" value="plus" type="checkbox" />
             </div>
             <div class="sign-container">
                 <div>Мінус</div>
-                <input id="minusCheck" class="second-check" name="sign" value="minus" type="checkbox" />
+                <input id="minusCheck" class="flipswitch" name="sign" value="minus" type="checkbox" />
             </div>
         </div>
 
@@ -37,7 +38,7 @@
             <input id="skladTo" type="number" class="startInputs">
         </div>
         <div>
-            <button id="startButomn" class="start-butomn" onclick="startTest()">Почати</button>
+            <button id="startButomn" class="button-main" onclick="startTest()">Почати</button>
         </div>
     </div>
     <div id="testPage" class="conteiner hiden">
@@ -86,11 +87,12 @@
             </div>
         </div>
         <div class="finish-butomn">
-            <button id="finishButton" onclick="lastContinue()">Продовжити</button>
+            <button id="finishButton" class="button-main" onclick="lastContinue()">Продовжити</button>
         </div>
 
     </div>
 </body>
-<script src="index.js"></script>
+<script src="changePage.js"></script>
+<script src="index.js "></script>
 
 </html>

@@ -18,8 +18,8 @@ let mark = document.getElementById("mark")
 let defaltSettings = {
     plus: true,
     minus: true,
-    howManyExamples: 100,
-    from: 2,
+    howManyExamples: 30,
+    from: 5,
     to: 10
 }
 
@@ -85,8 +85,7 @@ const reset = function() {
     input.value = ""
     falseCounter = 0
     trueCounter = 0
-    startPage.classList.remove("hiden")
-    testPage.classList.add("hiden")
+    changePage(pages.startPage)
     return 
 }
 
@@ -222,9 +221,7 @@ const exersise = function () {
         allAnswers: allSettings.howManyExamples,
         mark: markResalt
     }
-
-    testPage.classList.add("hiden")
-    resultPage.classList.remove("hiden")
+    changePage(pages.resultPage)
     setResult(resultModel)
     
 }
@@ -263,13 +260,11 @@ let data
 const startTest = function () {
     allSettings = getSettings()
     timeoutStop = false
-    startPage.classList.add("hiden")
-    testPage.classList.remove("hiden")
+    changePage(pages.testPage)
     checkBoxer()
     data = getData()
     if (data === false) {
-        startPage.classList.remove("hiden")
-        testPage.classList.add("hiden")
+        changePage(pages.startPage)
         return
     }
     if(stopAll) {
@@ -297,10 +292,7 @@ const lastContinue = function() {
     trueAnswer.innerText = ""
     falseCounter = 0
     trueCounter = 0
-    testPage.classList.remove("hiden")
-    testPage.classList.add("hiden")
-    startPage.classList.remove("hiden")
-    resultPage.classList.add("hiden")
+    changePage(pages.startPage)
 }
 
 skladTo = document.getElementById("skladTo")
