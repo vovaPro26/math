@@ -185,15 +185,21 @@ const checkBoxer = function () {
     }
 
 }
+
+let plusTrue = ""
+let minusTrue = ""
+
 const getData = function () {
     let count = 0
     let index = randomSum(0, sineMasiv.length - 1)
     const signMasiveIndex = sineMasiv[index];
     if (signMasiveIndex === "minus") {
+        minusTrue = "Мінус"
         count++
         return getDataM()
     }
     if (signMasiveIndex === "plus") {
+        plusTrue = "Плюс"
         count++
         return getDataPlus()
     }
@@ -217,7 +223,7 @@ const exersise = function () {
     }
     shareData = {
         title: "MDN",
-        text: `Правильних вдповідей ${trueCounter}. Неправильних відповідей ${falseCounter}`
+        text: `Правильних вдповідей ${trueCounter}. Неправильних відповідей ${falseCounter}. Оцінка ${markResalt}. Приклади робила на ${plusTrue} ${minusTrue} `
       };
 
     let resultModel = {
