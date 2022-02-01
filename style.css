@@ -22,6 +22,24 @@
     padding: 0px;
 }
 
+.share_button_div {
+    display: flex; 
+    justify-content: center;
+    margin-top: 1em;
+} 
+
+.share_button {
+    width: 10em;
+    height: 2.5em;
+    background-color: magenta;
+    border-radius: 20px;
+}
+
+.share_svg {
+    width: 1.5em;
+    height: 1.5em;
+}
+
 .start {
     display: flex;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

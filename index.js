@@ -206,6 +206,7 @@ const getData = function () {
 let resultPage = document.getElementById("resultPage")
 let allAnswers = document.getElementById("allAnswers")
 
+let shareData
 
 const exersise = function () {
     timeoutStop = true
@@ -214,6 +215,10 @@ const exersise = function () {
     if(markResalt > 12) {
         markResalt -= 1
     }
+    shareData = {
+        title: "MDN",
+        text: `Правильних вдповідей ${trueCounter}. Неправильних відповідей ${falseCounter}`
+      };
 
     let resultModel = {
         correctAnswers: trueCounter,
@@ -225,6 +230,16 @@ const exersise = function () {
     setResult(resultModel)
     
 }
+
+let btm = document.getElementById("shareButton")
+
+btm.addEventListener("click", async () => {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+    }
+  });
+  
 
 const checkResalt = function () {
     const res = parseInt(input.value)
@@ -294,6 +309,7 @@ const lastContinue = function() {
     trueCounter = 0
     changePage(pages.startPage)
 }
+
 
 skladTo = document.getElementById("skladTo")
 skladTo.onkeydown = keyDownStart;
