@@ -223,7 +223,7 @@ const exersise = function () {
     }
     shareData = {
         title: "MDN",
-        text: `Правильних вдповідей ${trueCounter}. Неправильних відповідей ${falseCounter}. Оцінка ${markResalt}. Приклади робила на ${plusTrue} ${minusTrue} `
+        text: `Правильних вдповідей ${trueCounter}.\n\rНеправильних відповідей ${falseCounter}.\n\rОцінка ${markResalt}.\n\rПриклади на ${plusTrue} ${minusTrue}`
       };
 
     let resultModel = {
