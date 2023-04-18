@@ -254,7 +254,7 @@ const exersise = function () {
     }
     shareData = {
         title: "MDN",
-        text: `Правильних вдповідей ${trueCounter}.\n\rНеправильних відповідей ${falseCounter}.\n\rОцінка ${markResalt}.\n\rПриклади на ${plusTrue}, ${minusTrue},${multiplicationTrue}\n\r Діапазон чисел від ${skladFrom.value} до ${skladTo.value}`
+        text: `Правильних вдповідей ${trueCounter}.\n\rНеправильних відповідей ${falseCounter}.\n\rОцінка ${markResalt}.\n\rПриклади на ${plusTrue} - ${getSettings().plus}, ${minusTrue} - ${getSettings().minus},${multiplicationTrue} - ${getSettings().multiplication}.\n\r Діапазон чисел від ${skladFrom.value} до ${skladTo.value}.\n\r Число на яке множили - ${getSettings().multiplicationOn}.`
       };
 
     let resultModel = {
