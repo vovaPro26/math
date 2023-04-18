@@ -1,9 +1,9 @@
 .flipswitch
 {
     position: relative;
-    background: lightblue;
-    width: 120px;
-    height: 40px;
+    background: rgb(240, 240, 240);
+    width: 14vw;
+    height: 5vw;
     -webkit-appearance: initial;
     border-radius: 8px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -35,6 +35,9 @@
     left:2%;
     background: coral;
     content: "OFF";
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .flipswitch:checked:after
 {
@@ -42,3 +45,12 @@
     background: green;
     content: "ON";  
 }
+
+@media (max-width: 450px) {
+    .flipswitch {
+        width: 20vw;
+        height: 10vw;
+    }
+  }
+
+

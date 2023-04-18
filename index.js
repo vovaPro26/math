@@ -6,6 +6,7 @@ let timeDiv = document.getElementById("time")
 let timeCounter = 11
 let trueCounter = 0
 let falseCounter = 0
+let timeRefresh = 10
 let trueAnswer = document.getElementById("true")
 let falseAnswer = document.getElementById("false")
 let first = document.getElementById("first")
@@ -14,13 +15,15 @@ let second = document.getElementById("second")
 let input = document.getElementById("input")
 let timeoutStop
 let mark = document.getElementById("mark")
-
+let stopAll
 let defaltSettings = {
     plus: true,
-    minus: true,
+    minus: true,   
+    multiplication: true,
     howManyExamples: 30,
     from: 5,
-    to: 10
+    to: 10,
+    multiplicationOn: 2
 }
 
 
@@ -29,35 +32,30 @@ const setSettings = function(sets) {
     plusCheck.checked = sets.plus
     let minusCheck = document.getElementById("minusCheck")
     minusCheck.checked = sets.minus
+    let multiplicationCheck = document.getElementById("multiplicationCheck")
+    multiplicationCheck.checked = sets.multiplication
     let howManyExamples = document.getElementById("examplesSolved")
     howManyExamples.value = sets.howManyExamples
     let skladFrom = document.getElementById("skladFrom")
     skladFrom.value = sets.from
     let skladTo = document.getElementById("skladTo")
     skladTo.value = sets.to
+    let multiplicationNumber = document.getElementById("multiplicationNumber")
+    multiplicationNumber.value = sets.multiplicationOn
 }
 
 setSettings(defaltSettings)
 
 
 let getSettings = function() {
-    let plusCheck = document.getElementById("plusCheck")
-    let minusCheck = document.getElementById("minusCheck")
-    let howManyExamples = document.getElementById("examplesSolved")
-    let skladFrom = document.getElementById("skladFrom")
-    let skladTo = document.getElementById("skladTo")
-    
-    let plusChecker = plusCheck.checked
-    let minusChecker = minusCheck.checked
-    let examples = parseInt(howManyExamples.value)
-    let skladFromValue = parseInt(skladFrom.value)
-    let skladToValue = parseInt(skladTo.value)
     let newSettings = {
-        plus: plusChecker,
-        minus: minusChecker,
-        howManyExamples: examples,
-        from: skladFromValue,
-        to: skladToValue
+        plus: document.getElementById("plusCheck").checked,
+        minus: document.getElementById("minusCheck").checked,       
+        multiplication: document.getElementById("multiplicationCheck").checked,
+        howManyExamples: parseInt(document.getElementById("examplesSolved").value),
+        from: parseInt(document.getElementById("skladFrom").value),
+        to: parseInt(document.getElementById("skladTo").value),
+        multiplicationOn: parseInt(document.getElementById("multiplicationNumber").value)
     }
     return newSettings
 }
@@ -77,7 +75,7 @@ const setResult = function(res) {
     mark.innerText = res.mark
 }
 
-let stopAll
+
 const reset = function() {
     stopAll = true
     falseAnswer.innerText = ""
@@ -85,6 +83,7 @@ const reset = function() {
     input.value = ""
     falseCounter = 0
     trueCounter = 0
+    timeRefresh = 10
     changePage(pages.startPage)
     return 
 }
@@ -103,11 +102,13 @@ const getDataPlus = function () {
     skladToValue = Math.floor(skladToValue)
     if(skladFromValue <= 1 || skladToValue <= 1) {
         reset()
+        stopAll = false
         alert("Не не не. Дуже просто")
         return
     }
     if(skladToValue < skladFromValue) {
         reset()
+        stopAll = false
         alert("Число яке вказано у Від не повинно бути більше ніж число яке вказане в До")
     }
     let sum = randomSum(parseInt(skladFrom.value), parseInt(skladTo.value))
@@ -130,6 +131,7 @@ const getDataM = function () {
     skladToValue = Math.floor(skladToValue)
     if(skladFromValue <= 1 || skladToValue <= 1) {
         reset()
+        stopAll = false
         if(skladToValue <= 1) skladTo.focus()
         if(skladFromValue <= 1) skladFrom.focus()
         alert("Не не не. Дуже просто")
@@ -137,12 +139,29 @@ const getDataM = function () {
     }
     if(skladToValue < skladFromValue ) {
         reset()
+        stopAll = false
         alert("Число яке вказано у Від не повинно бути більше ніж число яке вказане в До")
     }
     let first = randomSum(parseInt(skladFrom.value), parseInt(skladTo.value))
     let second = randomSum(1, first - 1)
     let sign = "-"
     const checker = res => first - second === res
+    return {
+        sign,
+        first,
+        second,
+        checker
+    }
+}
+
+const getDataMult = function () {
+    let multOn = allSettings.multiplicationOn
+    multOn = Math.floor(multOn)
+    
+    let first = getSettings().multiplicationOn
+    let second = Math.floor(Math.random() * 10)
+    let sign = "*"
+    const checker = res => first * second === res
     return {
         sign,
         first,
@@ -188,11 +207,17 @@ const checkBoxer = function () {
 
 let plusTrue = ""
 let minusTrue = ""
+let multiplicationTrue = ""
 
 const getData = function () {
     let count = 0
     let index = randomSum(0, sineMasiv.length - 1)
     const signMasiveIndex = sineMasiv[index];
+    if(Math.floor(allSettings.multiplicationOn) <= 1){
+        alert("Не не не. Дуже просто")
+        reset()
+        stopAll = false
+    }
     if (signMasiveIndex === "minus") {
         minusTrue = "Мінус"
         count++
@@ -203,6 +228,12 @@ const getData = function () {
         count++
         return getDataPlus()
     }
+    if (signMasiveIndex === "multiplication") {
+        multiplicationTrue = "Множення"
+        count++
+        return getDataMult()
+    }
+    
     if (count === 0) {
         alert("Стоп, вибери шось")
         return false
@@ -223,7 +254,7 @@ const exersise = function () {
     }
     shareData = {
         title: "MDN",
-        text: `Правильних вдповідей ${trueCounter}.\n\rНеправильних відповідей ${falseCounter}.\n\rОцінка ${markResalt}.\n\rПриклади на ${plusTrue}, ${minusTrue}\n\r Діапазон чисел від ${skladFrom.value} до ${skladTo.value}`
+        text: `Правильних вдповідей ${trueCounter}.\n\rНеправильних відповідей ${falseCounter}.\n\rОцінка ${markResalt}.\n\rПриклади на ${plusTrue}, ${minusTrue},${multiplicationTrue}\n\r Діапазон чисел від ${skladFrom.value} до ${skladTo.value}`
       };
 
     let resultModel = {
@@ -280,6 +311,7 @@ const checkResalt = function () {
 let data
 const startTest = function () {
     allSettings = getSettings()
+    timeCounter = 11
     timeoutStop = false
     changePage(pages.testPage)
     checkBoxer()
@@ -288,7 +320,7 @@ const startTest = function () {
         changePage(pages.startPage)
         return
     }
-    if(stopAll) {
+    if(stopAll === true) {
         return
     }
     clearTimeout(timeout)

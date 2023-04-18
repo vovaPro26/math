@@ -22,6 +22,11 @@
 </head>
 
 <body id="id">
+    
+    <div class="topName">
+        Математика
+    </div>
+    <div class="id2">
     <div id="startPage" class="start">
         <div class="checkBox-conteiner">
             <div class="sign-container">
@@ -31,6 +36,10 @@
             <div class="sign-container">
                 <div>Мінус</div>
                 <input id="minusCheck" class="flipswitch" name="sign" value="minus" type="checkbox" />
+            </div>
+            <div class="sign-container">
+                <div>Множення</div>
+                <input id="multiplicationCheck" class="flipswitch" name="sign" value="multiplication" type="checkbox" />
             </div>
         </div>
 
@@ -46,6 +55,10 @@
             <div>До: </div>
             <input id="skladTo" type="number" class="startInputs">
         </div>
+        <div class="start-row">
+            <div>Множення на</div>
+            <input id="multiplicationNumber" type="number" class="startInputs">
+        </div>
         <div>
             <button id="startButomn" class="button-main" onclick="startTest()">Почати</button>
         </div>
@@ -55,9 +68,6 @@
         </div> -->
     </div>
     <div id="testPage" class="conteiner hiden">
-        <div class="top">
-            <span>Математика Для Улянки</span>
-        </div>
         <div class="input">
             <div class="numbers">
                 <span id="first"></span>
@@ -107,6 +117,7 @@
                 <img class="share_svg" src="share-svgrepo-com.svg" />
             </button>
         </div>
+    </div>
     </div>
 </body>
 <script src="changePage.js"></script>
